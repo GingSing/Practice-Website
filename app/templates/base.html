@@ -7,8 +7,36 @@
     <title>Generic Shoe Website</title>
 </head>
 <body>
-
-{% block content %}{% endblock %}
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="{{ url_for('home') }}">Practice Website</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                        </li>
+                        {% if current_user.is_anonymous %}
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('home') }}">Home Again</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            {% if current_user.is_anonymous %}
+            <a class="register" href="{{ url_for('register') }}">Register</a>
+            <a class="login" href="{{ url_for('login') }}">Log In</a>
+            {% else %}
+            <a class="logout" href="{{ url_for('logout') }} ">Log Out</a>
+            {% endif %}
+        </nav>
+        <div class="parallax container-fluid"></div>
+    </header>
+    <div class="main-content container-fluid">
+        <div class="row justify-content-center">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
 
 </body>
 </html>

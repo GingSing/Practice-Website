@@ -1,16 +1,16 @@
-from app import app
+from app import app, db
 from flask import render_template, flash, redirect, url_for, request
-from app.forms import LoginForm
+from app.forms import LoginForm, RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from werkzeug.urls import url_parse
 from datetime import datetime
 
+
 @app.route('/')
-@app.route('/index')
-@login_required
-def index():
-    posts = {
+@app.route('/home')
+def home():
+    posts = [
         {
             'author': {'username': 'John'},
             'body': 'Beautiful day in Portland!'
@@ -19,11 +19,11 @@ def index():
             'author': {'username': 'Susan'},
             'body': 'The Avengers movie was so cool!'
         }
-    }
+    ]
     return render_template('home.html', title='Home', posts=posts)
 
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -39,3 +39,18 @@ def login():
             next_page = url_for('home')
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    # if form.validate_on_submit():
+    #     username = form.username.data
+    #     email = form.email.data
+    #     password = form.password.data
+    return render_template('register.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))

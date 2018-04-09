@@ -1,0 +1,61 @@
+body{
+}
+
+.main-content{
+    padding-top: 60px;
+    height: 1000px;
+}
+
+@media (max-width: 979px){
+    body{
+        padding-top: 0px;
+    }
+}
+
+.register{
+    color: grey;
+}
+
+.register:hover{
+    color:white;
+    text-decoration: none;
+}
+
+.login{
+    color: grey;
+    padding-left: 25px;
+}
+
+.login:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.logout{
+    color: grey;
+}
+
+.logout:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.parallax{
+    background: url('../images/bridge.jpg') no-repeat center;
+    background-size: cover 1000px;
+    background-attachment: fixed;
+    height: 300px;
+}
+
+.parallax-2{
+
+    background: url('../images/cool-shoes.jpg') no-repeat center;
+    background-size: cover 1000px;
+    background-attachment: fixed;
+    height: 300px;
+
+}
+
+.error{
+    color: red;
+}
