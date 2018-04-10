@@ -1,8 +1,12 @@
 body{
 }
 
+.bg-black{
+    background-color: black;
+}
+
 .main-content{
-    padding-top: 60px;
+    padding-top: 56px;
     height: 1000px;
 }
 
@@ -42,18 +46,15 @@ body{
 
 .parallax{
     background: url('../images/bridge.jpg') no-repeat center;
+    -webkit-filter: contrast(75%);
+    filter: contrast(75%);
     background-size: cover 1000px;
     background-attachment: fixed;
     height: 300px;
 }
 
-.parallax-2{
-
-    background: url('../images/cool-shoes.jpg') no-repeat center;
-    background-size: cover 1000px;
-    background-attachment: fixed;
-    height: 300px;
-
+.parallax p{
+    padding-top: 56px;
 }
 
 .error{

@@ -3,24 +3,16 @@ from flask import render_template, flash, redirect, url_for, request
 from app.forms import LoginForm, RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
+from app.static.sql import UserSQL
 from werkzeug.urls import url_parse
-from datetime import datetime
 
 
 @app.route('/')
 @app.route('/home')
+@login_required
 def home():
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('home.html', title='Home', posts=posts)
+    all_user =UserSQL.select_all()
+    return render_template('home.html', title='Home', users=all_user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -44,11 +36,17 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    # if form.validate_on_submit():
-    #     username = form.username.data
-    #     email = form.email.data
-    #     password = form.password.data
-    return render_template('register.html', form=form)
+    new_user = User()
+    if form.validate_on_submit():
+        new_user.username = form.username.data
+        new_user.email = form.email.data
+        new_user.set_password(form.password.data)
+        if form.password.data == form.confirm_password:
+            new_user.set_password(form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+    return render_template('home.html', form=form)
+
 
 @app.route('/logout')
 def logout():

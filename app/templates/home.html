@@ -2,10 +2,19 @@
 
 {% block content %}
 
-<p>
-
-
-</p>
-
+<div class="container">
+    <div class="row">
+    {% for user in users %}
+        <div class="col-md-4">
+            <div class="mb-4 card box-shadow">
+                <img class="card-img-top" src="{{ url_for('static', filename='images/cool-shoes.jpg') }}" data-holder-rendered="true">
+                <div class="card-body">
+                    <p>This is some text</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
 
 {% endblock %}
