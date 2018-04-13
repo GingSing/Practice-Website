@@ -1,0 +1,62 @@
+.button-div{
+
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 80px;
+    text-align: center;
+
+}
+
+.tab-content{
+    margin-top: 50px;
+    display: none;
+}
+
+.tab{
+    border: 1px solid black;
+    margin-left: 4%;
+}
+
+.button-div{
+    display:inline-block;
+}
+
+.showing{
+    display:block;
+}
+
+.active{
+    color: white;
+    background-color: black;
+}
+
+.post-container{
+    width: 30%;
+}
+
+.posts{
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.posts a{
+    text-decoration: none;
+    color: blue;
+}
+
+.posts a:hover{
+    color: orange;
+}
+
+.posts:hover{
+    background-color: #DCDCDC;
+    cursor: pointer;
+}
+
+.posts .title{
+    text-decoration: underline;
+    font-weight: bold;
+}

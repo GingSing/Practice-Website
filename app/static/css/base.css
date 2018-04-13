@@ -1,8 +1,25 @@
 body{
+
 }
 
-.bg-black{
+.bg-color{
     background-color: black;
+}
+
+.navbar a{
+    color: white;
+}
+
+.nav-item{
+    margin-left: 30px;
+}
+
+.navbar-nav{
+    width: 100%;
+}
+
+.navbar-brand{
+    font-size: 32px;
 }
 
 .main-content{
@@ -50,11 +67,13 @@ body{
     filter: contrast(75%);
     background-size: cover 1000px;
     background-attachment: fixed;
-    height: 300px;
+    height: 200px;
+    margin-top: 65px;
 }
 
-.parallax p{
-    padding-top: 56px;
+.border-beige{
+    border: 5px solid #eaeab4;
+    padding: 50px;
 }
 
 .error{

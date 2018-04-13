@@ -2,37 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/base.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Generic Shoe Website</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/base.css') }}">
+    <title>Tally</title>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-black fixed-top">
-            <a class="navbar-brand" href="{{ url_for('home') }}">Practice Website</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-                        </li>
-                        {% if current_user.is_anonymous %}
-                        {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('home') }}">Home Again</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            {% if current_user.is_anonymous %}
-            <a class="register" href="{{ url_for('register') }}">Register</a>
-            <a class="login" href="{{ url_for('login') }}">Log In</a>
-            {% else %}
-            <a class="logout" href="{{ url_for('logout') }} ">Log Out</a>
-            {% endif %}
+        <nav class="navbar navbar-expand-md bg-color fixed-top justify-content-center">
+            <a class="navbar-brand" href="{{ url_for('home') }}">Tally</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggler">
+                <span class="navbar-toggler-icon" style="color: white;"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    {% if current_user.is_anonymous %}
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('browse') }}">Browse</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('saved') }}">Saved</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% if current_user.is_anonymous %}
+                <a class="register" href="{{ url_for('register') }}">Register</a>
+                <a class="login" href="{{ url_for('login') }}">Login</a>
+                {% else %}
+                <a class="logout" href="{{ url_for('logout') }}">Logout</a>
+                {% endif %}
+            </div>
         </nav>
     </header>
-    <div class="parallax container-fluid">
-        </div>
+    <div class="parallax container-fluid"></div>
     <div class="main-content container-fluid">
         <div class="row justify-content-center">
             {% block content %}{% endblock %}

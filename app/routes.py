@@ -9,7 +9,6 @@ from werkzeug.urls import url_parse
 
 @app.route('/')
 @app.route('/home')
-@login_required
 def home():
     all_user =UserSQL.select_all()
     return render_template('home.html', title='Home', users=all_user)
@@ -45,7 +44,30 @@ def register():
             new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
-    return render_template('home.html', form=form)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('home')
+        return redirect(next_page)
+    return render_template('register.html', form=form)
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    return render_template('profile.html')
+
+
+@app.route('/browse', methods=['GET', 'POST'])
+@login_required
+def browse():
+    users = UserSQL.select_all()
+    return render_template('browse.html', users=users)
+
+
+@app.route('/saved', methods=['GET', 'POSTS'])
+@login_required
+def saved():
+    return render_template('saved.html')
 
 
 @app.route('/logout')

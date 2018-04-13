@@ -2,19 +2,81 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row">
-    {% for user in users %}
-        <div class="col-md-4">
-            <div class="mb-4 card box-shadow">
-                <img class="card-img-top" src="{{ url_for('static', filename='images/cool-shoes.jpg') }}" data-holder-rendered="true">
-                <div class="card-body">
-                    <p>This is some text</p>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/home.css') }}">
+
+<div class="container-fluid d-flex justify-content-center">
+    <div class="tab">
+        <div class="button-div tablinks active" id="daily">Daily</div>
+        <div class="button-div tablinks" id="weekly">Weekly</div>
+    </div>
+</div>
+<div class="tab-content container-fluid showing" id="daily-content">
+    <div class="conatiner-fluid justify-content-center">
+        <div class="row justify-content-center">
+            <div class="container d-flex justify-content-around">
+                <div class="post-container d-flex flex-column">
+                    <h4>Posts:</h4>
+                    <div class=" posts" onclick="window.location='{{ url_for('browse') }}';">
+                        <span class="position-fixed title">Binary Tree</span><br>
+                        <span class="position-fixed">This binary tree is going to be something.</span><br>
+                        {% if not current_user.is_anonymous %}
+                        <a class="float-right" href="">Save Post</a>
+                        {% endif %}
+                    </div>
+                    <div class="posts" onclick="window.location='{{ url_for('browse') }}';">
+                        <span class="title">Make a For Loop</span><br>
+                        <span>Show the implementation of a for loop in action.</span><br>
+                        {% if not current_user.is_anonymous %}
+                        <a class="float-right" href="">Save Post</a>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <div>
+                        <span class="float-right">Load More...</span>
+                    </div>
+                </div>
+                <div>
+                    section that is shown
                 </div>
             </div>
         </div>
-    {% endfor %}
     </div>
 </div>
+
+<div class="tab-content container-fluid" id="weekly-content">
+    <div class="conatiner-fluid justify-content-center">
+        <div class="row justify-content-center">
+            <div class="container d-flex justify-content-around">
+                <div class="post-container d-flex flex-column">
+                    <h4>Posts:</h4>
+                    <div class=" posts" onclick="window.location='{{ url_for('browse') }}';">
+                        <span class="position-fixed title">Make Thirteen Binary Trees</span><br>
+                        <span class="position-fixed">This binary tree is going to be something.</span><br>
+                        {% if not current_user.is_anonymous %}
+                        <a class="float-right" href="">Save Post</a>
+                        {% endif %}
+                    </div>
+                    <div class="posts" onclick="window.location='{{ url_for('browse') }}';">
+                        <span class="title">Make Two For Loops</span><br>
+                        <span>Show the implementation of a for loop in action.</span><br>
+                        {% if not current_user.is_anonymous %}
+                        <a class="float-right" href="">Save Post</a>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <div>
+                        <span class="float-right">Load More...</span>
+                    </div>
+                </div>
+                <div>
+                    section that is shown
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='javascript/home.js') }}"></script>
 
 {% endblock %}
