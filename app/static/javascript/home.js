@@ -9,7 +9,6 @@ function turnOffActiveTabs(){
 };
 
 function turnOffSelectedTabs(){
-
     $('.posts').removeClass('selected');
 }
 
@@ -22,52 +21,27 @@ $('.tablinks').click(function(){
 
 });
 
-//$('.posts').click(function(){
-//
-//    turnOffSelectedTabs();
-//    $('#' + this.id).addClass('selected');
-//    let post_id = this.id;
-//    $('#show-area-' + current_tab).load("/static/text/a.html", function(){
-//        $.getJSON($SCRIPT_ROOT + '/get_weekly_posts/' + post_id
-//        , function(data){
-//            console.log(data.post_title);
-//            $("#header").html(data.post_title);
-//            $("#subheader").html(data.post_subtitle);
-//            $("#content").html(data.post_content);
-//        });
-//    });
-//});
-
 $('.posts').click(function(){
 
     turnOffSelectedTabs();
     $('#' + this.id).addClass('selected');
-    let post_id = this.id;
+    let post_id = this.id.substring(0,1);
     $.ajax({
         url: "../static/text/a.html",
         dataType: 'html',
         cache: false,
         success: function(data){
-            //$('#show-area-' + current_tab)).html(data);
             for(let i = 0; i < $weekly.length; i++){
                 if($weekly[i]['post_id'] == post_id){
-                    $("#header", $(data)).html($weekly[i]['title']);
-                    console.log(data);
-                    $("#show-area2").html(data);
+                    var div = jQuery("<div/>"); // changes the contents before adding (faster)
+                    div.html(data);
+                    div.find("#header").html($weekly[i]['post_title']);
+                    div.find("#subheader").html($weekly[i]['post_subtitle']);
+                    div.find("#content").html($weekly[i]['post_content']);
+                    $("#show-area-" + current_tab).html(div.html())
                     break;
                 }
             }
         }
     });
 });
-
-//function loadSecondDoc(){
-//    $ajax({
-//        url: '../static/text/b.html',
-//        dataType : 'html',
-//        cache : false,
-//        success: function (data) {
-//            ${'#show-area2'}.html(data);
-//        }
-//    });
-//}

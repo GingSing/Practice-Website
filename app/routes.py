@@ -12,15 +12,13 @@ from werkzeug.urls import url_parse
 def home():
     all_user = UserSQL.select_all()
     posts_daily = select.select_daily_posts().fetchall()
-    print(posts_daily)
     daily = []
-    # for thing in posts_daily:
-    #     print(thing)
-    #     daily.append(dict(thing))
+    for daily_item in posts_daily:
+        daily.append(dict(daily_item))
     posts_weekly = select.select_weekly_posts().fetchall()
     weekly = []
-    for thing in posts_weekly:
-        weekly.append(dict(thing))
+    for weekly_item in posts_weekly:
+        weekly.append(dict(weekly_item))
     return render_template('home.html', title='Home', users=all_user, daily_posts=daily, weekly_posts=weekly)
 
 
@@ -68,7 +66,8 @@ def register():
 def post():
     form = PostForm()
     if form.validate_on_submit():
-        insert.create_post(form.title.data, form.subtitle.data, form.content.data, str(User.get_id(current_user)))
+        # insert.create_post(form.title.data, form.subtitle.data, form.content.data, str(User.get_id(current_user)))
+        insert.create_post(form.title.data, form.subtitle.data, form.content.data, 1)
         return redirect(url_for('home'))
     return render_template('post.html', form=form)
 
@@ -92,12 +91,12 @@ def saved():
     return render_template('saved.html')
 
 
-@app.route('/get_weekly_posts/<post_id>', methods=["GET"])
+@app.route('/post/<post_id>', methods=['POST'])
 @login_required
-def get_weekly_posts(post_id):
-    post_weekly = select.select_weekly_posts(post_id).fetchone()
-    d = dict(post_weekly)
-    return jsonify(d)
+def read_post(post_id):
+    post = select.select_weekly_posts(post_id).fetchall()
+    print(post[0]['content'])
+    return render_template('read_post.html')
 
 
 @app.route('/logout')

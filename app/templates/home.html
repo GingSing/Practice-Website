@@ -23,7 +23,7 @@
                     <h4>Daily Posts:</h4>
                     <div class="light-border">
                         {% for post in daily_posts %}
-                        <div class="posts" id="{{ post.post_id }}">
+                        <div class="posts" id="{{ post.post_id }}-daily">
                             <span class="title">{{ post.post_title }}</span><br>
                             <span>{{ post.post_desc }}</span><br>
                             {% if not current_user.is_anonymous %}
@@ -55,7 +55,7 @@
                     <h4>Weekly Posts:</h4>
                     <div class="light-border">
                         {% for weekly_post in weekly_posts %}
-                        <div class="posts" id="{{ weekly_post.post_id }}">
+                        <div class="posts" id="{{ weekly_post.post_id }}-weekly">
                             <span class="title">{{ weekly_post.post_title }}</span><br>
                             <span>{{ weekly_post.post_desc }}</span><br>
                             {% if not current_user.is_anonymous %}
