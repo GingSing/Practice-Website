@@ -17,3 +17,7 @@ def select_weekly_posts(id=None):
     else:
         return db.engine.execute("SELECT * FROM posts WHERE post_time >= '" + last_week + "\'")
 
+
+def select_saved(id):
+    return db.engine.execute("SELECT * FROM saved WHERE user_id = " + id +
+                             "RIGHT JOIN posts ON saved.user_id = posts.post_id ORDER BY post_date DESC")

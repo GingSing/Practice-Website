@@ -88,15 +88,15 @@ def browse():
 @app.route('/saved', methods=['GET', 'POSTS'])
 @login_required
 def saved():
-    return render_template('saved.html')
+    saved_list = select.select_saved().fetchall()
+    return render_template('saved.html', saved=saved_list)
 
 
-@app.route('/post/<post_id>', methods=['POST'])
+@app.route('/post_data/<data>', methods=["POST"])
 @login_required
-def read_post(post_id):
-    post = select.select_weekly_posts(post_id).fetchall()
-    print(post[0]['content'])
-    return render_template('read_post.html')
+def post_data(data):
+    print(data)
+    return insert.save_post(current_user.get_id(), data)
 
 
 @app.route('/logout')

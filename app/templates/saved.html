@@ -2,12 +2,13 @@
 
 {% block content %}
 
-<h1>Saved Posts:</h1>
 <div>
-
-</div>
-<div>
-
+    <h2>Saved Posts:</h2>
+    <div>
+        {% for item in saved[:10] %}
+            <p>{{ item }}</p>
+        {% endfor %}
+    </div>
 </div>
 
 

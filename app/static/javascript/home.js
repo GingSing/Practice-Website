@@ -35,9 +35,10 @@ $('.posts').click(function(){
                 if($weekly[i]['post_id'] == post_id){
                     var div = jQuery("<div/>"); // changes the contents before adding (faster)
                     div.html(data);
-                    div.find("#header").html($weekly[i]['post_title']);
-                    div.find("#subheader").html($weekly[i]['post_subtitle']);
-                    div.find("#content").html($weekly[i]['post_content']);
+                    div.find(".header").html($weekly[i]['post_title']);
+                    div.find(".header").id = post_id;
+                    div.find(".subheader").html($weekly[i]['post_subtitle']);
+                    div.find(".content").html($weekly[i]['post_content']);
                     $("#show-area-" + current_tab).html(div.html())
                     break;
                 }
