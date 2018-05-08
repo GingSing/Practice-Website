@@ -1,0 +1,38 @@
+<style>
+    .border-top-post{
+        border-top: 3px solid #28a745;
+        height: 100%;
+        width: 100%;
+    }
+    .container-stuff{
+        border-left: 1px solid #DCDCDC;
+        border-bottom: 1px solid #DCDCDC;
+        border-right: 1px solid #DCDCDC;
+        height: 100%;
+        width: 100%;
+    }
+    p {
+        font-size: 14px;
+    }
+    button{
+        margin-top: 10px;
+        margin-bottom: 20px;
+        width: 200px;
+    }
+    h3{
+        padding-top: 10px;
+    }
+</style>
+
+<div class="border-top-post">
+    <div class="container-stuff">
+        <div class ="container-fluid" style="box-shadow: 0.5px 3px grey; width: 100%;">
+            <h3 id="header"></h3>
+            <h6 id="subheader"></h6>
+            <button type="button" class="btn btn-outline-success">Submit</button>
+        </div>
+        <div class = "container-fluid" style="padding: 30px; overflow-y: auto; height: 300px;">
+            <p id="content"></p>
+        </div>
+    </div>
+</div>

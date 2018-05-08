@@ -3,40 +3,44 @@
 {% block content %}
 
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/home.css') }}">
+<script type="text/javascript">
 
-<div class="container-fluid d-flex justify-content-center">
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    $weekly = {{ weekly_posts|tojson|safe }}
+
+</script>
+
+<div class="tab-changer">
     <div class="tab">
-        <div class="button-div tablinks active" id="daily">Daily</div>
-        <div class="button-div tablinks" id="weekly">Weekly</div>
+        <div class="button-div tablinks active" id="daily">Daily</div><div class="button-div tablinks" id="weekly">Weekly</div>
     </div>
 </div>
 <div class="tab-content container-fluid showing" id="daily-content">
-    <div class="conatiner-fluid justify-content-center">
-        <div class="row justify-content-center">
-            <div class="container d-flex justify-content-around">
+    <div class="conatiner-fluid">
+        <div class="row">
+            <div class="container d-flex daily-content justify-content-between">
                 <div class="post-container d-flex flex-column">
-                    <h4>Posts:</h4>
-                    <div class=" posts" onclick="window.location='{{ url_for('browse') }}';">
-                        <span class="position-fixed title">Binary Tree</span><br>
-                        <span class="position-fixed">This binary tree is going to be something.</span><br>
-                        {% if not current_user.is_anonymous %}
-                        <a class="float-right" href="">Save Post</a>
-                        {% endif %}
-                    </div>
-                    <div class="posts" onclick="window.location='{{ url_for('browse') }}';">
-                        <span class="title">Make a For Loop</span><br>
-                        <span>Show the implementation of a for loop in action.</span><br>
-                        {% if not current_user.is_anonymous %}
-                        <a class="float-right" href="">Save Post</a>
-                        {% endif %}
+                    <h4>Daily Posts:</h4>
+                    <div class="light-border">
+                        {% for post in daily_posts %}
+                        <div class="posts" id="{{ post.post_id }}">
+                            <span class="title">{{ post.post_title }}</span><br>
+                            <span>{{ post.post_desc }}</span><br>
+                            {% if not current_user.is_anonymous %}
+                            <div class="container-fluid d-flex justify-content-end">
+                                <a href="">Save Post</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+
                     </div>
                     <br>
                     <div>
                         <span class="float-right">Load More...</span>
                     </div>
                 </div>
-                <div>
-                    section that is shown
+                <div id="show-area-daily">
                 </div>
             </div>
         </div>
@@ -44,39 +48,36 @@
 </div>
 
 <div class="tab-content container-fluid" id="weekly-content">
-    <div class="conatiner-fluid justify-content-center">
-        <div class="row justify-content-center">
-            <div class="container d-flex justify-content-around">
+    <div class="conatiner-fluid">
+        <div class="row">
+            <div class="container d-flex daily-content">
                 <div class="post-container d-flex flex-column">
-                    <h4>Posts:</h4>
-                    <div class=" posts" onclick="window.location='{{ url_for('browse') }}';">
-                        <span class="position-fixed title">Make Thirteen Binary Trees</span><br>
-                        <span class="position-fixed">This binary tree is going to be something.</span><br>
-                        {% if not current_user.is_anonymous %}
-                        <a class="float-right" href="">Save Post</a>
-                        {% endif %}
-                    </div>
-                    <div class="posts" onclick="window.location='{{ url_for('browse') }}';">
-                        <span class="title">Make Two For Loops</span><br>
-                        <span>Show the implementation of a for loop in action.</span><br>
-                        {% if not current_user.is_anonymous %}
-                        <a class="float-right" href="">Save Post</a>
-                        {% endif %}
+                    <h4>Weekly Posts:</h4>
+                    <div class="light-border">
+                        {% for weekly_post in weekly_posts %}
+                        <div class="posts" id="{{ weekly_post.post_id }}">
+                            <span class="title">{{ weekly_post.post_title }}</span><br>
+                            <span>{{ weekly_post.post_desc }}</span><br>
+                            {% if not current_user.is_anonymous %}
+                            <div class="container-fluid d-flex justify-content-end">
+                                <a href="">Save Post</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
                     </div>
                     <br>
                     <div>
                         <span class="float-right">Load More...</span>
                     </div>
                 </div>
-                <div>
-                    section that is shown
+                <div id="show-area-weekly">
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<script src="{{ url_for('static', filename='javascript/home.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='javascript/home.js') }}"></script>
 
 {% endblock %}
